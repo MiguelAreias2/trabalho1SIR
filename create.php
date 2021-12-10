@@ -1,6 +1,5 @@
 <?php
 require_once './database/conexao.php';
-
 $erros = [];
 $nomeErr;
 $emailErr;
