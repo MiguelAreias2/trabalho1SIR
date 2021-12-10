@@ -70,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1 class="mt-5">Registar</h1>
 
         <a href="index.php" class="btn btn-outline-success mt-3">Lista de users</a>
+        <a href="login.php" class="btn btn-outline-success mt-3">Login</a>
 
         <form class="mt-5" action="create.php" method="POST">
             <div class="mb-3">
