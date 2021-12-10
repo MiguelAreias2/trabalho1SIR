@@ -1,12 +1,12 @@
 <?php
 require_once './database/conexao.php';
-$erros = [];
 $nomeErr;
 $emailErr;
 $passwordErr;
 $nomeuser = '';
 $email = '';
 $passe = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nomeuser = $_POST['nomeuser'];
     $email = $_POST['email'];
@@ -24,6 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $emailErr  = "Formato de email inválido";
     }
 
+    $stmt = $pdo->prepare("SELECT email FROM users WHERE email = :email");
+    $stmt->bindValue(':email', $email);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (isset($user) && !empty($user)) {
+        $emailErr = 'Este email já tem uma conta associada';
+    }
     if (!$passe) {
         $passwordErr  = 'A palavra-passe é obrigatorio!';
     }
@@ -50,20 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $statement->bindValue(':passe', $passe);
 
         $statement->execute();
+
+        header('location: login.php');
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar user</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
+<?php include_once './componentes/header.php' ?>
 
 <body>
     <div class="container">
