@@ -1,31 +1,16 @@
 <?php
-require_once './database/conexao.php';
+include_once './componentes/head.php';
+session_start();
+$_SESSION['iduser']="";
+$_SESSION['nomeuser']="";
 
-$statement = $pdo->prepare("SELECT * FROM users");
-$statement->execute();
-$users = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-?>
-<?php include_once './componentes/header.php' ?>
+ ?>
 
 <body>
-    <div class="container">
-        <h1 class="mt-5">Lista de users</h1>
-        <a href="create.php" class="btn btn-outline-success mt-3">Registar user</a>
-        <ul class="list-group mt-5">
-            <?php foreach ($users as $i => $user) : ?>
-                <li class="list-group-item">
-                    <div class="container">
-                        <h4><?php echo $i . ' - ' . $user['nomeuser'] ?></h4>
-                        <span class="badge rounded-pill bg-secondary"><?php echo $user['passe'] ?></span>
-                        <?php if ($user['email']) : ?>
-                            <p class="mt-4"><?php echo $user['email'] ?></p>
-                        <?php endif; ?>
-                    </div>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+    <h1>Pagina inicial</h1>
+
+    <a href="login.php">login</a>
+    <a href="create.php">registo</a>
 </body>
 
 </html>

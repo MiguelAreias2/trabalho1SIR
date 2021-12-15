@@ -3,14 +3,12 @@
         <nav>
             <div class="topnav">
                 <a class="active" href="#home">Home</a>
-                <a href="#news">News</a>
-                <a href="#contact">Contact</a>
-                <a href="#about">About</a>
-                <input type="button" id="botaoLogout" value="Logout">
+                <a href="#">Apontamentos</a>
+                <a href="#">Perfil</a>
+                <a href="index.php" id="botaoLogout">Logout</a>
+                <a href="" class="icon" onclick="">
+                    <i class="fa fa-bars"></i>
+                </a>
             </div>
-            
-                
-            
         </nav>
-
     </header>

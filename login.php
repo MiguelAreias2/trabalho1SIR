@@ -1,7 +1,6 @@
 <?php
 require_once './database/conexao.php';
 require_once './componentes/head.php';
-require_once './componentes/navBar.php';
 
 $email = '';
 $passe = '';
@@ -9,68 +8,65 @@ $erro;
 
 session_start();
 
-//<<<<<<< Updated upstream
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $email = $_POST['email'];
     $passe = $_POST['passe'];
 
-    $stmt = $pdo->prepare("SELECT iduser FROM users WHERE email = :email AND passe = :passe");
+    $stmt = $pdo->prepare("SELECT iduser, nomeuser FROM users WHERE BINARY email = :email AND BINARY passe = :passe");
     $stmt->bindValue(':email', $email);
     $stmt->bindValue(':passe', $passe);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
     if (!$user) {
         $erro = 'Dados de login incorretos!';
+    } else {
+        $_SESSION['iduser'] = $user['iduser'];
+        $_SESSION['nomeuser'] = $user['nomeuser'];
+        header("Location:menu.php");
     }
 }
 ?>
 
-<div class="container">
-    <div class="row">
-        <div class="col"></div>
-        <div class="col">
-            <div class>
-                <img src="./assets/logo.png" alt="" width="250" height="250">
-            </div>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-1"></div>
+            <div class="col-md-6 col-10">
+                <div class="logo">
+                    <img src="./assets/logo.png" alt="" width="250" height="250">
+                </div>
 
-            <div>
-                <form action="">
-                    <h3>Login</h3>
-                    <div>
-                        <input type="text" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping">
-                    </div>
-
-                    <div class="rounded m-3 bg-light">
+                <div>
+                    <div class="formulario">
                         <form action="" method="POST">
-                            <h3 class="text-center p-3">Login</h3>
+                            <h2 class="">Login</h2>
                             <?php if (!empty($erro)) : ?>
-                                <div class="alert alert-danger">
-                                    <div><?php echo $erro ?></div>
+                                <div class="">
+                                    <p><?php echo $erro ?></p>
                                 </div>
                             <?php endif; ?>
-                            <div class="input-group flex-nowrap p-3">
-                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" name="email">
+                            <div class="">
+                                <i class="iconEmail"></i>
+                                <input type="text" class="" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" name="email">
                             </div>
-                            <div class="input-group flex-nowrap p-3">
-                                <input type="text" class="form-control" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping" name="passe">
-
+                            <div class="">
+                                <input type="password" class="" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping" name="passe">
                             </div>
                             <div>
-                                <button type="submit">Login</button>
+                                <input type="submit" value="Login">
                             </div>
                         </form>
                     </div>
+                </div>
+                <div class="col-md-3 col-1"></div>
             </div>
-            <div class="col"></div>
         </div>
     </div>
+</main>
 
+</header>
+</body>
 
-    </header>
-    </body>
-
-    </html>
+</html>

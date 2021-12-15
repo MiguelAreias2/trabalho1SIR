@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<?php include_once './componentes/header.php' ?>
+<?php include_once './componentes/head.php' ?>
 
 <body>
     <div class="container">

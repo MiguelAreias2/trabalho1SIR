@@ -6,37 +6,173 @@ body {
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: rgb(150, 149, 149);
+  background-color: rgb(255, 255, 255);
   overflow: hidden;
 }
 
+.topnav a.icon {
+  display: none;
+}
 /* Style the links inside the navigation bar */
-.topnav a{
+.topnav a {
   float: left;
-  color: #333;
+  color: #000000;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
 }
 
-#botaoLogout {
-  color: #333;
-}
-
 /* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
+.topnav a:hover, #botaoLogout:hover {
+  background-color: rgb(121, 121, 121);
+  color: rgb(255, 255, 255);
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #04AA6D;
+  background-color:#2fe7bc;
   color: white;
 }
 
+#botaoLogout {
+  float: right;
+  color: #000000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
 
-  
+.logo {
+  text-align: center;
+  margin-top: 20px;
+}
 
+img {
+  border-radius: 20px;
+}
+
+.formulario {
+  text-align: center;
+  margin-top: 20px ;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.formulario div {
+  margin-top: 20px;
+}
+
+form input[type="text"] {
+    position: relative;
+    z-index: 1;
+    margin : 1em 0;
+    display: inline-block;
+    width : 60%;
+    max-width: 100%;
+    vertical-align: top;
+    border:none;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+form input[type="text"]:hover {
+  position: relative;
+  z-index: 1;
+  margin : 1em 0;
+  display: inline-block;
+  width : 62%;
+  max-width: 100%;
+  vertical-align: top;
+  border:none;
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+form input[type="text"]:focus {
+  position: relative;
+  z-index: 1;
+  margin : 1em 0;
+  display: inline-block;
+  width : 62%;
+  max-width: 100%;
+  vertical-align: top;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+form input[type="password"] {
+  position: relative;
+  z-index: 1;
+  margin : 1em 0;
+  display: inline-block;
+  width : 60%;
+  max-width: 100%;
+  vertical-align: top;
+  border:none;
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+form input[type="password"]:hover {
+position: relative;
+z-index: 1;
+margin : 1em 0;
+display: inline-block;
+width : 62%;
+max-width: 100%;
+vertical-align: top;
+border:none;
+border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+form input[type="password"]:focus {
+position: relative;
+z-index: 1;
+margin : 1em 0;
+display: inline-block;
+width : 62%;
+max-width: 100%;
+vertical-align: top;
+border: 1px solid rgb(255, 255, 255);
+}
+
+form input[type="submit"]{
+  margin-bottom: 20px;
+  border: 2px solid #2fe7bc;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+form input[type="submit"]:hover{
+  background-color: #2fe7bc;
+  color: white;
+}
+
+form h2 {
+  padding-top: 20px;
+}
  
+/* .iconEmail { */
+
+/* } */
+
+@media screen and (max-width: 768px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+  .topnav {
+    width: 100vw;
+  }
+
+  img {
+    width: 75%;
+  }
+
+  .formulario{
+    width: 100%;
+  }
+}
