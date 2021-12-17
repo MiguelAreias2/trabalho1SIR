@@ -5,6 +5,7 @@ require_once './componentes/head.php';
 $email = '';
 $passe = '';
 $erro;
+$sessaoIniciada='';
 
 session_start();
 
@@ -26,8 +27,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['nomeuser'] = $user['nomeuser'];
         header("Location:menu.php");
     }
+    else
+    {
+        $sessaoIniciada = 'Sessão Iniciada!';
+    }
 }
 ?>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-1"></div>
+            <div class="col-md-6 col-10">
+                <div class="logo">
+                    <img src="./assets/logo.png" alt="" width="250" height="250">
+                </div>
 
 <main>
     <div class="buttons">
