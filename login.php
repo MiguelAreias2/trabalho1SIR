@@ -30,12 +30,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <main>
+    <div class="buttons">
+        <a href="./index.php" class="butt">Pagina Inicial</a>
+        <a href="./create.php" class="butt">Registar-se</a>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-1"></div>
             <div class="col-md-6 col-10">
                 <div class="logo">
-                    <img src="./assets/logo.png" alt="" width="250" height="250">
+                    <img src="./assets/Logo2.png" alt="" width="250" height="250">
                 </div>
 
                 <div>
@@ -44,12 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <h2 class="">Login</h2>
                             <?php if (!empty($erro)) : ?>
                                 <div class="">
-                                    <p><?php echo $erro ?></p>
+                                    <p class="alerta"><?php echo $erro ?></p>
                                 </div>
                             <?php endif; ?>
                             <div class="">
                                 <i class="iconEmail"></i>
-                                <input type="text" class="" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" name="email">
+                                <input type="text" class="" placeholder="Email" aria-label="Email" aria-describedby="addon-wrapping" name="email">
                             </div>
                             <div class="">
                                 <input type="password" class="" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping" name="passe">

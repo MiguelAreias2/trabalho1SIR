@@ -8,45 +8,8 @@ $email = '';
 $passe = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nomeuser = $_POST['nomeuser'];
-    $email = $_POST['email'];
-    $passe = $_POST['passe'];
-
-    if (!$nomeuser) {
-        $nomeErr = 'O nome é obrigatorio!';
-    }
-
-    if (!$email) {
-        $emailErr = 'O email é obrigatorio!';
-    }
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr  = "Formato de email inválido";
-    }
-
-    $stmt = $pdo->prepare("SELECT email FROM users WHERE email = :email");
-    $stmt->bindValue(':email', $email);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (isset($user) && !empty($user)) {
-        $emailErr = 'Este email já tem uma conta associada';
-    }
-    if (!$passe) {
-        $passwordErr  = 'A palavra-passe é obrigatorio!';
-    }
-
-    if (!preg_match("#[0-9]+#", $passe)) {
-        $passwordErr  = "A palavra-passe deve conter pelo menos um número!";
-    }
-
-    if (!preg_match("#[A-Z]+#", $passe)) {
-        $passwordErr  = "A palavra-passe deve conter pelo menos uma letra maiscula!!";
-    }
-
-    if (!preg_match("#[a-z]+#", $passe)) {
-        $passwordErr  = "A palavra-passe deve conter pelo menos uma letra minuscula!";
-    }
+    
+    include_once './func/funcuser.php';
 
     if (empty($nomeErr) && empty($emailErr) && empty($passwordErr)) {
 
@@ -65,45 +28,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <?php include_once './componentes/head.php' ?>
 
-<body>
+<main>
     <div class="container">
-        <h1 class="mt-5">Registar</h1>
+        <div class="row">
+            <div class="col-md-3 col-1"></div>
+            <div class="col-md-6 col-10">
+                <div class="logo">
+                    <img src="./assets/Logo2.png" alt="" width="250" height="250">
+                </div>
 
-        <a href="index.php" class="btn btn-outline-success mt-3">Lista de users</a>
-        <a href="login.php" class="btn btn-outline-success mt-3">Login</a>
-
-        <form class="mt-5" action="create.php" method="POST">
-            <div class="mb-3">
-                <label class="form-label">Nome</label>
-                <?php if (!empty($nomeErr)) : ?>
-                    <div class="alert alert-danger">
-                        <div><?php echo $nomeErr ?></div>
+                <div>
+                    <a href="index.php" class="btn btn-outline-success mt-3">Pagina Inicial</a>
+                    <a href="login.php" class="btn btn-outline-success mt-3">Login</a>
+                    <div class="formulario">
+                        <form action="" method="POST">
+                            <h2 class="">Registar-se</h2>
+                            <div class="">
+                                <label class="form-label">Nome</label>
+                                <br>
+                                <?php if (!empty($nomeErr)) : ?>
+                                    <div class="">
+                                        <p class="alerta"><?php echo $nomeErr ?></p>
+                                    </div>
+                                <?php endif; ?>
+                                <input type="text" class="" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" name="nomeuser" <?php if (empty($nomeErr)) : ?>value="<?php echo $nomeuser ?>" <?php endif; ?>>
+                            </div>
+                            <div class="">
+                                <label class="form-label">Email</label>
+                                <?php if (!empty($emailErr)) : ?>
+                                    <div class="">
+                                        <p class="alerta"><?php echo $emailErr ?></p>
+                                    </div>
+                                <?php endif; ?>
+                                <i class="iconEmail"></i>
+                                <input type="text" class="" placeholder="Email" aria-label="email" aria-describedby="addon-wrapping" name="email" <?php if (empty($emailErr)) : ?>value="<?php echo $email ?>" <?php endif; ?>>
+                            </div>
+                            <div class="">
+                                <label class="form-label">Palavra-passe</label>
+                                <?php if (!empty($passwordErr)) : ?>
+                                    <div class="">
+                                        <p class="alerta"><?php echo $passwordErr ?></p>
+                                    </div>
+                                <?php endif; ?>
+                                <input type="password" class="" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping" name="passe" <?php if (empty($passeErr)) : ?>value="<?php echo $passe ?>" <?php endif; ?>>
+                            </div>
+                            <div>
+                                <input type="submit" value="Registar-se">
+                            </div>
+                        </form>
                     </div>
-                <?php endif; ?>
-                <input type="text" class="form-control" name="nomeuser" value="<?php echo $nomeuser ?>">
+                </div>
+                <div class="col-md-3 col-1"></div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <?php if (!empty($emailErr)) : ?>
-                    <div class="alert alert-danger">
-                        <div><?php echo $emailErr ?></div>
-                    </div>
-                <?php endif; ?>
-                <input class="form-control" name="email" value="<?php echo $email ?>">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Palava-passe</label>
-                <?php if (!empty($passwordErr)) : ?>
-                    <div class="alert alert-danger">
-                        <div><?php echo $passwordErr ?></div>
-                    </div>
-                <?php endif; ?>
-                <input type="password" step=".2" class="form-control" name="passe" value="<?php echo $passe ?>">
-            </div>
-            <button type="submit" class="btn btn-primary">Registar-se</button>
-        </form>
-
+        </div>
     </div>
-</body>
+</main>
 
 </html>

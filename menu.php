@@ -1,5 +1,5 @@
 <?php
-require_once './componentes/verificalogin.php';
+require_once './func/verificalogin.php';
 require_once './componentes/head.php';
 require_once './componentes/navBar.php';
 require_once './database/conexao.php';
