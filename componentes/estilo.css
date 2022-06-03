@@ -152,37 +152,60 @@ form input[type="submit"]:hover{
 form h2 {
   padding-top: 20px;
 }
- 
-/* .iconEmail { */
 
-/* } */
-
-@media screen and (max-width: 768px) {
-  .topnav a:not(:first-child) {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-  .topnav {
-    width: 100vw;
-  }
-
-  img {
-    width: 75%;
-  }
-
-  .formulario{
-    width: 100%;
-  }
+ul {
+  list-style-type: none;
+}
+select {
+  margin-bottom: 20px;
+  border: 1px solid #000000;
+  background-color: white;
+  color: black;
+  padding: 14px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-.logowcp {
-  text-align: center;
-  padding-top: 40px;
-  width: 40vw;
-
+textarea{
+  margin-bottom: 20px;
+  border: 2px solid #000000;
+  background-color: white;
+  width: 60%;
+  color: black;
+  padding: 14px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
+form input[type="file"] {
+  margin-bottom: 20px;
+  border: none;
+  background-color: white;
+  width: 65%;
+  padding: 14px 80px;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  
+}
+#inputPesquisa{
+  margin: 1px;
+  border: 1px solid #000000;
+  background-color: white;
+  color: black;
+  padding: 14px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#apontamentosContainer{
+  background-color: white;
+  border-radius: 10px;
+}
 
 .tit{
   padding-top: 100px;
@@ -244,14 +267,12 @@ form h2 {
 }
 
 .col{
-  border: 1px solid rgb(0, 0, 0);
   text-align: center;
   height: 50px;
-  background-color: white;
 }
 
 .butfav{
-  background-color: Transparent;
+    background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
     cursor:pointer;
@@ -267,4 +288,45 @@ form h2 {
 ::selection {
   background-color: cyan;
 }
+
+.row{
+  margin-top: 20px;
+}
+
+.elementoLista{
+  background-color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 20px ;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+  .topnav {
+    width: 100vw;
+  }
+
+  img {
+    width: 75%;
+  }
+
+  .formulario{
+    width: 100%;
+  }
+}
+
+.logowcp {
+  text-align: center;
+  padding-top: 40px;
+  width: 40vw;
+
+}
+
+
+
 

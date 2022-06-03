@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $passe = $_POST['passe'];
 
-    $stmt = $pdo->prepare("SELECT iduser, nomeuser FROM users WHERE BINARY email = :email AND BINARY passe = :passe");
+    $stmt = $pdo->prepare("SELECT iduser, nomeuser, flag FROM users WHERE BINARY email = :email AND BINARY passe = :passe ");
     $stmt->bindValue(':email', $email);
     $stmt->bindValue(':passe', $passe);
     $stmt->execute();
@@ -21,10 +21,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$user) {
         $erro = 'Dados de login incorretos!';
-    } else {
-        $_SESSION['iduser'] = $user['iduser'];
-        $_SESSION['nomeuser'] = $user['nomeuser'];
-        header("Location:menu.php");
+    } else {   
+        if($user['flag']){
+            $_SESSION['iduser'] = $user['iduser'];
+            $_SESSION['nomeuser'] = $user['nomeuser'];
+            header("Location:menu.php");
+        }else{
+            $erro = 'Esta conta está desativada!';
+        }
     }
 }
 ?>
@@ -45,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div>
                     <div class="formulario">
                         <form action="" method="POST">
-                            <h2 class="">Login</h2>
+                            <h2 class="">Iniciar Sessão</h2>
                             <?php if (!empty($erro)) : ?>
                                 <div class="">
                                     <p class="alerta"><?php echo $erro ?></p>
@@ -59,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input type="password" class="" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping" name="passe">
                             </div>
                             <div>
-                                <input type="submit" value="Login">
+                                <input type="submit" value="Iniciar Sessão">
                             </div>
                         </form>
                     </div>

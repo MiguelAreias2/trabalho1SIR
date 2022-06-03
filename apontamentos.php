@@ -4,18 +4,58 @@ require_once './componentes/head.php';
 require_once './componentes/navBar.php';
 require_once './database/conexao.php';
 
-$statement = $pdo->prepare("SELECT * FROM apontamento where iduser=:idlogado and favoritos = 1");
+$statement = $pdo->prepare("SELECT * FROM tipoapontamento;");
+$statement->execute();
+$tipoapontamentos = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+$statement = $pdo->prepare("SELECT * FROM apontamento where iduser = :idlogado ;");
 $statement->bindValue(':idlogado', $_SESSION['iduser']);
 $statement->execute();
 $apontamentos = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+$pesq = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $tipo = $_POST['tipo'];
+    $pesq = '%' . $_POST['pesq'] . '%';
+
+    if ($tipo == 0) {
+        $statement = $pdo->prepare("SELECT * FROM apontamento where iduser = :idlogado and nomeapontamento LIKE :pesq ;");
+        $statement->bindValue(':pesq', $pesq);
+        $statement->bindValue(':idlogado', $_SESSION['iduser']);
+        $statement->execute();
+        $apontamentos = $statement->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+
+        $statement = $pdo->prepare("SELECT * FROM apontamento where iduser = :idlogado and idtipoapontamento = :tipo and nomeapontamento LIKE :pesq ;");
+        $statement->bindValue(':tipo', $tipo);
+        $statement->bindValue(':pesq', $pesq);
+        $statement->bindValue(':idlogado', $_SESSION['iduser']);
+        $statement->execute();
+        $apontamentos = $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
 ?>
 
 <body>
+    <div class="container">
+        <h1>Lista apontamentos</h1>
+        <form action="" method="POST">
+            <select name="tipo" id="">
+                <option value="0">Tipo de apontamento</option>
+                <?php foreach ($tipoapontamentos as $tipoapontamento) : ?>
+                    <option value="<?php echo $tipoapontamento['idtipoapontamento'] ?>">
+                        <?php echo $tipoapontamento['nometipoapontamento'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <input type="text" class="" placeholder="Pesquisa" name="pesq" <?php if ($pesq) : ?>value="<?php echo $_POST['pesq'] ?>" <?php endif; ?>>
+
+            <input type="submit" value="pesquisar">
+        </form>
+    </div>
 
     <div class="container">
-        <h1>Os seus destaques</h1>
-        <br>
         <div class="row">
             <div class="col-md-1 col-2"></div>
             <div class="col-md-10 col-10">
@@ -58,18 +98,18 @@ $apontamentos = $statement->fetchAll(PDO::FETCH_ASSOC);
                             <div class="col">
                                 <form action="./deleteapontamento.php" method="POST">
                                     <input type="hidden" name="id" value="<?php echo $apontamento['idapontamento'] ?>">
-                                    <button type="submit" class="butt">Apagar</button>
+                                    <button type="submit" class="butt">Eliminar</button>
                                 </form>
                             </div>
                             <div class="col">
-
-                                <a href="infoapontamento.php?id=<?php echo $apontamento['idapontamento'] ?>" class="butt">Editar</a>
+                                
+                                <a href="infoapontamento.php?id=<?php echo $apontamento['idapontamento'] ?>"  class="butt">Infos.</a>
                             </div>
 
                         </div>
                     <?php endforeach;
                 elseif (!$apontamentos) : ?>
-                    <h4>Não tem destaques. Crie apontamentos e selecione os seus destaques.</h4>
+                    <h4>Não foram encontrados dados</h4>
                 <?php endif; ?>
 
 
